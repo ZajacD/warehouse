@@ -1,0 +1,123 @@
+<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+</mat-menu>
+<div class="container-fluid" style="margin-top: 10px;">
+    <div class="form">
+        <div class="note">
+            <h2 style="text-transform: uppercase; font-family:Arial, Helvetica, sans-serif;">Registration</h2>
+        </div>
+        <div class="form-content">
+            <form class="form-horizontal" [formGroup]="userForm" (ngSubmit)="saveUser(userForm.value)">
+                <div class="form-group row" style="margin-left: 4px;">
+                    <div class="col-md-6">
+                        <h4 style="font-weight: bold; text-transform: uppercase;">User data</h4>
+                        <mat-form-field class="content-width">
+                            <mat-label style="font-weight: bold;">Email</mat-label>
+                            <mat-label> *</mat-label>
+                            <input matInput formControlName="email" [(ngModel)]="user.email" placeholder="Email">
+                            <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.touched">
+                                Invalid email
+                            </mat-error>
+                        </mat-form-field>
+                        <div>
+                            <mat-form-field class="content-width" style="margin-top: 2%;">
+                                <mat-label style="font-weight: bold;">Password</mat-label>
+                                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                <input matInput #password [type]="hide ? 'password' : 'text'" required [(ngModel)]="user.password" formControlName="password" placeholder="Password">
+                                <mat-error *ngIf="userForm.controls.password.invalid && userForm.controls.password.touched">
+                                    Invalid password
+                                </mat-error>
+                                <mat-hint allign="end" aria-live="polite">
+                                    {{password.value.length}} / 25
+                                </mat-hint>
+                            </mat-form-field>
+                            <div class="content-width">
+                                <mat-password-strength #passwordComponent [password]="password.value">
+                                </mat-password-strength>
+                                <mat-password-strength-info [passwordComponent]="passwordComponent">
+                                </mat-password-strength-info>
+                            </div>
+                        </div>
+                        <div>
+                            <mat-form-field class="content-width" style="margin-top: 2%;">
+                                <mat-label style="font-weight: bold;">Confirm password</mat-label>
+                                <mat-icon matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">
+                                    {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                <input matInput #confirmPassword [type]="hideConfirmPassword ? 'password' : 'text'" required formControlName="confirmPassword" placeholder="Confirm password">
+                                <mat-hint allign="end" aria-live="polite">
+                                    {{confirmPassword.value.length}} / 25
+                                </mat-hint>
+                                <mat-error *ngIf="userForm.controls.confirmPassword.errors?.MatchPassword && userForm.controls.confirmPassword.touched">
+                                    Incorrect confirm password
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 style="font-weight: bold; text-transform: uppercase;">Company data</h4>
+                        <div class="row">
+                            <div>
+                                <mat-form-field style="width: 100%;" style="margin-left: 15px;">
+                                    <mat-label style="font-weight: bold;">Nip</mat-label>
+                                    <input matInput #taxNumber [(ngModel)]="seller.taxNumber" formControlName="taxNumber" placeholder="Nip">
+                                    <mat-hint allign="end" aria-live="polite">
+                                        {{taxNumber.value.length}} / 10</mat-hint>
+                                    <mat-error *ngIf="userForm.controls.taxNumber.errors?.sumvalid && userForm.controls.taxNumber.touched">
+                                        Incorrect Tax id
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <mat-label style="font-weight: bold;">Post code</mat-label>
+                                <input matInput formControlName="postcode" [(ngModel)]="seller.postcode" placeholder="Post code">
+                                <mat-error *ngIf="userForm.controls.postcode.invalid && userForm.controls.postcode.touched">
+                                    Incorrect post code
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="content-width">
+                                <mat-label style="font-weight: bold;">Company name</mat-label>
+                                <input matInput formControlName="name" id="name" [(ngModel)]="seller.name" name="email" placeholder="Company name">
+                                <mat-error *ngIf="userForm.controls.name.invalid && userForm.controls.name.touched">
+                                    Incorrect company name
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="content-width">
+                                <mat-label style="font-weight: bold;">Country</mat-label>
+                                <input matInput formControlName="country" [(ngModel)]="seller.country" placeholder="country">
+                                <mat-error *ngIf="userForm.controls.country.invalid && userForm.controls.country.touched">
+                                    Country is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="content-width">
+                                <mat-label style="font-weight: bold;">City</mat-label>
+                                <input matInput formControlName="city" [(ngModel)]="seller.city" placeholder="City">
+                                <mat-error *ngIf="userForm.controls.city.invalid && userForm.controls.city.touched">
+                                    City is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset">
+                        <button style="margin-top: 5px;" *ngIf="!isSaved" type="submit" class="btn btn-success">Save</button>
+                    </div>
+                    <div class="col-sm-offset">
+                        <button style="margin-top: 5px;" type="submit" *ngIf="isSaved" class="btn btn-success" disabled>Saved
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
