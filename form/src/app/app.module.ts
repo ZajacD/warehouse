@@ -14,6 +14,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RegisterComponent } from './register/register.component'
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NavbarComponent } from './nav/navbar.component';
+import { UsernameHeaderComponent } from './nav/username_header.component';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from './routes';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guard/auth.guard';
+import { MatDialogModule } from '@angular/material/dialog';
+import { HttpModule } from '@angular/http';
+import { AuthService } from './services/auth.service';
+
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -24,13 +34,17 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent
+    RegisterComponent,
+    UsernameHeaderComponent,
+    NavbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     NoopAnimationsModule,
     MatMenuModule,
     FormsModule,
+    MatDialogModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatPasswordStrengthModule,
@@ -38,10 +52,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatIconModule,
     MatButtonModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),   
+    HttpModule 
   ],
   providers: [
-    ValidationService
+    ValidationService,
+    AuthGuard,
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })

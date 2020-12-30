@@ -1,0 +1,85 @@
+<nav *ngIf="!main" class="navbar navbar-expand-lg navbar-dark bg-dark  ">
+    <!--
+    <a class="navbar-brand newFont" [routerLink]="['/']">System fakturownia online</a>
+  -->
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="collapseExample" [ngbCollapse]="isCollapsed">
+
+
+        <ul class="navbar-nav mr-auto " *ngIf="isLogged">
+            <a class=" nav-link newFontHeader" [routerLink]="['/main']">Magazyn</a>
+        </ul>
+        <ul class="navbar-nav mr-auto " *ngIf="!isLogged">
+            <a class=" nav-link newFontHeader" [routerLink]="['/']">Magazyn</a>
+        </ul>
+        <ul class="navbar-nav mr-auto ">
+
+            <li class="nav-item" style="cursor:pointer;" *ngIf="isLogged">
+                <div ngbDropdown placement="bottom-right" class="d-inline-block ">
+                    <a class="nav-link dropdown-toggle newFont" style="cursor:pointer;" id="dropdownBasic2" ngbDropdownToggle>
+            Magazyn1
+          </a>
+                    <div ngbDropdownMenu class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownBasic2 " style="margin-left: 0px; padding:0px; ">
+                        <button [routerLink]="['/invoices']" class="dropdown-item  newFont">
+              Magazyn2
+            </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav mr-auto">
+
+            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/invoices/new']" class="nav-item">
+                <div>
+                    <a class="nav-link newFont ">Magazyn3</a>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto">
+
+            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/clients']" class="nav-item newFont">
+                <div>
+                    <a class="nav-link newFont">Magazyn4</a>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto">
+            <li style="cursor:pointer;" *ngIf="isLogged" class="nav-item" [routerLink]="['/item']">
+                <a class="nav-link newFont">Magazyn5</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto">
+            <li style="cursor:pointer;" *ngIf="isLogged" class="nav-item" [routerLink]="['/reports/actual']">
+                <div>
+                    <a class="nav-link newFont">Magazyn6</a>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav mr-auto">
+            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/settings/rodo']" class="nav-item">
+                <div>
+                    <a class="nav-link newFont ">Ustawienia</a>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav mr-auto">
+            <li *ngIf="!isLogged && !registrationInProgress " class="nav-item newFont">
+                <a class="nav-link" [routerLink]="['/registration']">Zarejestruj się</a>
+            </li>
+
+            <li *ngIf="!isLogged" class="nav-item newFont">
+                <a class="nav-link" [routerLink]="['/login']">Logowanie</a>
+            </li>
+
+        </ul>
+
+
+        <username-header></username-header>
+    </div>
+</nav>
+<router-outlet></router-outlet>

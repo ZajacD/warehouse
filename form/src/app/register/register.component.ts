@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
     console.log(this.seller);
     if (this.userForm.valid) {
       this.user.seller = this.seller;
-      this.http.post(environment.API_URL + '/api/register', this.user).subscribe(res => {
+      this.http.post(environment.API_URL + '/api/auth/register', this.user).subscribe(res => {
         this.isSaved = true;
         console.log(res);
       },

@@ -1,0 +1,17 @@
+<ul class="navbar-nav mr-auto">
+    <li *ngIf="isLogged" style="margin-right: 5px">
+        <div class="col ">
+            <div ngbDropdown placement="bottom-left" class="d-inline-block ">
+                <a style="cursor:pointer;" class="nav-link dropdown-toggle newFont" id="dropdownBasic3 " ngbDropdownToggle translate>
+          {{userName}}
+        </a>
+                <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right newFont" aria-labelledby="dropdownBasic3">
+                    <button style="cursor:pointer;" [routerLink]="['/login']" class="dropdown-item newFont" translate>
+            Navbar.LogOut
+          </button>
+
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>

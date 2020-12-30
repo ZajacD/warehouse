@@ -1,0 +1,53 @@
+<!--end of navbar-->
+<div class="container navbarImg" style="position: fixed; height: 100%; max-width: 100%;">
+    <div class="row justify-content-center">
+        <div class="login col-sm-4">
+            <div class="login-shadow" style="padding-top: 40px; background-color:white; width: 70%;">
+                <div class="row justify-content-center">
+                    <div>
+                        <h1 style="margin-top: 20px;">Logowanie</h1>
+                        <hr />
+                    </div>
+                </div>
+                <div class="main-login">
+                    <form name="form" (ngSubmit)="login()" #f="ngForm" novalidate>
+                        <div class="row justify-content-center">
+                            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                                <label for="username" class="control-label">Email</label>
+                                <div class="">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" id="username" name="username" [(ngModel)]="model.username" #username="ngModel" required>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                                <label for="password" class="control-label">Hasło</label>
+                                <div class="">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-list fa" aria-hidden="true"></i></span>
+                                        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="model.password" #password="ngModel" required>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="form-group ">
+                                <button type="submit" id="registrationButton" class="btn btn-primary btn-lg btn-block login-button" style="font-size: 14px;">Zaloguj
+                </button>
+                                <a href="javascript:;" (click)="forgottenPassword()" class="btn btn-link">
+                  Zapomniałeś hasła?
+                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

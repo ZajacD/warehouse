@@ -6,9 +6,12 @@ import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
+import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 
 @Entity
 @Audited
@@ -26,6 +29,8 @@ public class User {
     @ManyToOne
     @JoinColumn
     private Seller seller;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<AppRole> appRoles = new HashSet<AppRole>(0);
 
     public long getId() {
         return id;
@@ -65,5 +70,13 @@ public class User {
 
     public void setSeller(Seller seller) {
         this.seller = seller;
+    }
+
+    public Set<AppRole> getAppRoles() {
+        return appRoles;
+    }
+
+    public void setAppRoles(Set<AppRole> appRoles) {
+        this.appRoles = appRoles;
     }
 }
