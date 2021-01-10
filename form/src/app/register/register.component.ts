@@ -6,7 +6,7 @@ import { ValidationService } from '../services/validation.service';
 import { TaxNumberValidator } from '../services/taxnumber-check.directive';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
   public url;
   public file;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient,
+  constructor(private formBuilder: FormBuilder, private http: HttpClient,private router: Router,
   ) {
   }
   ngOnInit() {
@@ -53,6 +53,7 @@ export class RegisterComponent implements OnInit {
       this.http.post(environment.API_URL + '/api/auth/register', this.user).subscribe(res => {
         this.isSaved = true;
         console.log(res);
+        this.router.navigate(['login']);
       },
         error => {
           console.log(error);

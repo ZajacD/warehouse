@@ -32,7 +32,7 @@ public class RegisterServiceImpl implements RegisterService{
         System.out.println(user.getEmail());
         seller.setEmail(user.getEmail());
         System.out.println(seller.getCity());
-        sellerRepository.save(seller);
+        seller = sellerRepository.save(seller);
         System.out.println(user.getPassword());
         user.setPassword(encoder.encode(user.getPassword()));
         Set<AppRole> appRoles = new HashSet<>();
@@ -40,6 +40,7 @@ public class RegisterServiceImpl implements RegisterService{
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
         appRoles.add(adminAppRole);
         user.setAppRoles(appRoles);
+        user.setSeller(seller);
         userRepository.save(user);
         return ResponseEntity.ok("Create user successful");
     }

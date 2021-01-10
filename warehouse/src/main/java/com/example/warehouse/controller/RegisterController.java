@@ -5,12 +5,10 @@ import com.example.warehouse.model.User;
 import com.example.warehouse.services.register.RegisterService;
 import com.example.warehouse.services.user.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class RegisterController {
 
     private final RegisterService registerService;
@@ -23,4 +21,6 @@ public class RegisterController {
 
         return registerService.createUser(user,user.getSeller());
     }
+
+
 }

@@ -5,7 +5,7 @@
     <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
     <span class="navbar-toggler-icon"></span>
   </button>
-    <div class="collapse navbar-collapse" id="collapseExample" [ngbCollapse]="isCollapsed">
+    <div class="collapse navbar-collapse" id="collapseExample">
 
 
         <ul class="navbar-nav mr-auto " *ngIf="isLogged">
@@ -14,44 +14,30 @@
         <ul class="navbar-nav mr-auto " *ngIf="!isLogged">
             <a class=" nav-link newFontHeader" [routerLink]="['/']">Magazyn</a>
         </ul>
-        <ul class="navbar-nav mr-auto ">
 
-            <li class="nav-item" style="cursor:pointer;" *ngIf="isLogged">
-                <div ngbDropdown placement="bottom-right" class="d-inline-block ">
-                    <a class="nav-link dropdown-toggle newFont" style="cursor:pointer;" id="dropdownBasic2" ngbDropdownToggle>
-            Magazyn1
-          </a>
-                    <div ngbDropdownMenu class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownBasic2 " style="margin-left: 0px; padding:0px; ">
-                        <button [routerLink]="['/invoices']" class="dropdown-item  newFont">
-              Magazyn2
-            </button>
-                    </div>
-                </div>
-            </li>
-        </ul>
 
-        <ul class="navbar-nav mr-auto">
+        <ul *onlyForRoles="['ROLE_ADMIN']" class="navbar-nav mr-auto">
 
-            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/invoices/new']" class="nav-item">
+            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/uploadMaterial']" class="nav-item">
                 <div>
-                    <a class="nav-link newFont ">Magazyn3</a>
+                    <a class="nav-link newFont ">Materialy</a>
                 </div>
             </li>
         </ul>
-        <ul class="navbar-nav mr-auto">
+        <ul *onlyForRoles="['ROLE_ADMIN']" class="navbar-nav mr-auto">
 
-            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/clients']" class="nav-item newFont">
+            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/uploadRackSpace']" class="nav-item newFont">
                 <div>
-                    <a class="nav-link newFont">Magazyn4</a>
+                    <a class="nav-link newFont">Miejsca regałowe</a>
                 </div>
             </li>
         </ul>
-        <ul class="navbar-nav mr-auto">
+        <ul *onlyForRoles="['ROLE_USER']" class="navbar-nav mr-auto">
             <li style="cursor:pointer;" *ngIf="isLogged" class="nav-item" [routerLink]="['/item']">
                 <a class="nav-link newFont">Magazyn5</a>
             </li>
         </ul>
-        <ul class="navbar-nav mr-auto">
+        <ul *onlyForRoles="['ROLE_USER']" class="navbar-nav mr-auto">
             <li style="cursor:pointer;" *ngIf="isLogged" class="nav-item" [routerLink]="['/reports/actual']">
                 <div>
                     <a class="nav-link newFont">Magazyn6</a>

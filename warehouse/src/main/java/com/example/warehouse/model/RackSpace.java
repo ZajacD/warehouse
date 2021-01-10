@@ -15,7 +15,7 @@ public class RackSpace {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long rackId;
+    private String rackId;
 
     private String status;
     private double width;
@@ -32,11 +32,11 @@ public class RackSpace {
         this.id = id;
     }
 
-    public Long getRackId() {
+    public String getRackId() {
         return rackId;
     }
 
-    public void setRackId(Long rackId) {
+    public void setRackId(String rackId) {
         this.rackId = rackId;
     }
 

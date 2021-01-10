@@ -23,6 +23,9 @@ import { AuthGuard } from './guard/auth.guard';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpModule } from '@angular/http';
 import { AuthService } from './services/auth.service';
+import { UploadMaterialComponent } from './admin/uploadMaterial/upload.material.component';
+import { UploadRackPlaceComponent } from './admin/uploadRackSpace/upload.rack.place.component';
+import { NgxPermissionModule } from 'ngx-permission/ngx-permission.module';
 
 
 
@@ -37,7 +40,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegisterComponent,
     UsernameHeaderComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    UploadMaterialComponent,
+    UploadRackPlaceComponent
   ],
   imports: [
     BrowserModule,
@@ -53,8 +58,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatButtonModule,
     MatCheckboxModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),   
-    HttpModule 
+    RouterModule.forRoot(appRoutes),
+    HttpModule,
+    NgxPermissionModule
   ],
   providers: [
     ValidationService,

@@ -8,18 +8,16 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot) {
     const expectedRole = route.data.expectedRole;
-    if (localStorage.getItem('currentUser')) {
       // logged in so return true
       if(expectedRole == undefined || localStorage.getItem("permissions").includes(expectedRole))
       {
       return true;
-      }
     }
     else{
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     }
 
-    this.router.navigate(['/main']);
+    this.router.navigate(['/']);
     // not logged in so redirect to login page
     return false;
   }

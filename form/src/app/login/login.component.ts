@@ -52,6 +52,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.model).subscribe(
       data => {
         console.log(data)
+        localStorage.setItem('auth_token', "BearerJWT " + data.accessToken);
+        localStorage.setItem('permissions', data.roles);
+        this.router.navigate(['uploadMaterial']);
       },
       err => {
         console.log(err)
@@ -59,5 +62,5 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  
+
 }
