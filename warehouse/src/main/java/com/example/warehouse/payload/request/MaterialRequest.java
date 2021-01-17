@@ -1,16 +1,25 @@
-package com.example.warehouse.model;
+package com.example.warehouse.payload.request;
 
-import org.hibernate.envers.Audited;
+import com.example.warehouse.model.Material;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Audited
-public class Material {
+public class MaterialRequest {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    public MaterialRequest(Material material) {
+        this.id = material.getId();
+        this.nofMaterial = material.getNofMaterial();
+        this.weight = material.getWeight();
+        this.height = material.getHeight();
+        this.length = material.getLength();
+        this.weight = material.getWeight();
+        this.dateOfUse = material.getDateOfUse();
+        this.priority = material.getPriority();
+        this.supplier = material.getSupplier();
+        this.supplierCountry = material.getSupplierCountry();
+        this.status = material.getStatus();
+    }
+
     private Long id;
 
     private Long nofMaterial;
@@ -23,11 +32,6 @@ public class Material {
     private String supplier;
     private String supplierCountry;
     private String status;
-    @ManyToOne
-    private Seller seller;
-
-    @OneToOne
-    private RackSpace rackSpace;
 
     public Long getId() {
         return id;
@@ -109,27 +113,11 @@ public class Material {
         this.supplierCountry = supplierCountry;
     }
 
-    public RackSpace getRackSpace() {
-        return rackSpace;
-    }
-
-    public void setRackSpace(RackSpace rackSpace) {
-        this.rackSpace = rackSpace;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Seller getSeller() {
-        return seller;
-    }
-
-    public void setSeller(Seller seller) {
-        this.seller = seller;
     }
 }

@@ -20,13 +20,29 @@
 
             <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/uploadMaterial']" class="nav-item">
                 <div>
-                    <a class="nav-link newFont ">Materialy</a>
+                    <a class="nav-link newFont ">Dodaj materialy</a>
                 </div>
             </li>
         </ul>
         <ul *onlyForRoles="['ROLE_ADMIN']" class="navbar-nav mr-auto">
 
             <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/uploadRackSpace']" class="nav-item newFont">
+                <div>
+                    <a class="nav-link newFont">Dodaj miejsca regałowe</a>
+                </div>
+            </li>
+        </ul>
+        <ul *onlyForRoles="['ROLE_ADMIN']" class="navbar-nav mr-auto">
+
+            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/materials']" class="nav-item">
+                <div>
+                    <a class="nav-link newFont ">Materialy</a>
+                </div>
+            </li>
+        </ul>
+        <ul *onlyForRoles="['ROLE_ADMIN']" class="navbar-nav mr-auto">
+
+            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/rackSpaces']" class="nav-item newFont">
                 <div>
                     <a class="nav-link newFont">Miejsca regałowe</a>
                 </div>

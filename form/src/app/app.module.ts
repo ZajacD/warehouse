@@ -25,7 +25,11 @@ import { HttpModule } from '@angular/http';
 import { AuthService } from './services/auth.service';
 import { UploadMaterialComponent } from './admin/uploadMaterial/upload.material.component';
 import { UploadRackPlaceComponent } from './admin/uploadRackSpace/upload.rack.place.component';
+import { MaterialsComponent } from './admin/materials/materials.component';
 import { NgxPermissionModule } from 'ngx-permission/ngx-permission.module';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { RackSpacesComponent } from './admin/rackSpaces/rack.spaces.component';
 
 
 
@@ -42,7 +46,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     NavbarComponent,
     LoginComponent,
     UploadMaterialComponent,
-    UploadRackPlaceComponent
+    UploadRackPlaceComponent,
+    MaterialsComponent,
+    RackSpacesComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +66,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     HttpModule,
-    NgxPermissionModule
+    NgxPermissionModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
   providers: [
     ValidationService,

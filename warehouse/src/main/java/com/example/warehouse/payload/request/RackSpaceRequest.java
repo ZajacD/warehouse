@@ -1,15 +1,20 @@
-package com.example.warehouse.model;
+package com.example.warehouse.payload.request;
 
-import org.hibernate.envers.Audited;
+import com.example.warehouse.model.RackSpace;
 
-import javax.persistence.*;
+public class RackSpaceRequest {
 
-@Entity
-@Audited
-public class RackSpace {
+    public RackSpaceRequest(RackSpace rackSpace) {
+        this.id = rackSpace.getId();
+        this.rackId = rackSpace.getRackId();
+        this.status = rackSpace.getStatus();
+        this.width = rackSpace.getWidth();
+        this.height = rackSpace.getHeight();
+        this.length = rackSpace.getLength();
+        this.maxWeight = rackSpace.getMaxWeight();
+        this.priority = rackSpace.getPriority();
+    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String rackId;
@@ -20,9 +25,6 @@ public class RackSpace {
     private double length;
     private double maxWeight;
     private int priority;
-    @ManyToOne
-    private Seller seller;
-
 
     public Long getId() {
         return id;
@@ -86,13 +88,5 @@ public class RackSpace {
 
     public void setPriority(int priority) {
         this.priority = priority;
-    }
-
-    public Seller getSeller() {
-        return seller;
-    }
-
-    public void setSeller(Seller seller) {
-        this.seller = seller;
     }
 }

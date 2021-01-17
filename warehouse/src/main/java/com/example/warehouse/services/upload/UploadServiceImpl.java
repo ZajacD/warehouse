@@ -2,11 +2,17 @@ package com.example.warehouse.services.upload;
 
 import com.example.warehouse.model.Material;
 import com.example.warehouse.model.RackSpace;
+import com.example.warehouse.model.Seller;
+import com.example.warehouse.model.User;
 import com.example.warehouse.repository.MaterialRepository;
 import com.example.warehouse.repository.RackSpaceRepository;
+import com.example.warehouse.repository.SellerRepository;
+import com.example.warehouse.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +29,10 @@ public class UploadServiceImpl implements UploadService {
     private MaterialRepository materialRepository;
     @Autowired
     private RackSpaceRepository rackSpaceRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private SellerRepository sellerRepository;
 
     @Override
     public ResponseEntity<?> uploadMaterials(MultipartFile file) {
@@ -36,7 +46,12 @@ public class UploadServiceImpl implements UploadService {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
                     .body("Nof lines were not accepted");
-        }
+        }       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        User user = userRepository.findByLogin(name).get();
+
+
+        Seller seller = user.getSeller();
 
         for (String line : materials) {
             String[] mat = line.split(";");
@@ -53,6 +68,7 @@ public class UploadServiceImpl implements UploadService {
             material.setPriority(Integer.parseInt(mat[6]));
             material.setSupplier(mat[7]);
             material.setSupplierCountry(mat[8]);
+            material.setSeller(seller);
             materialRepository.save(material);
         }
         return ResponseEntity.ok("File was upload");
@@ -63,7 +79,6 @@ public class UploadServiceImpl implements UploadService {
         if (file.isEmpty()) {
             return (ResponseEntity<?>) ResponseEntity.noContent();
         }
-
         List<String> rackPlaces = readFile(file);
         String header = rackPlaces.remove(0);
         if (rackPlaces.stream().anyMatch(mat -> mat.split(";").length != 7)) {
@@ -71,7 +86,12 @@ public class UploadServiceImpl implements UploadService {
                     .status(HttpStatus.CONFLICT)
                     .body("Nof lines were not accepted");
         }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        User user = userRepository.findByLogin(name).get();
 
+
+        Seller seller = user.getSeller();
         for (String line : rackPlaces) {
             String[] rack = line.split(";");
             RackSpace rackSpace = new RackSpace();
@@ -82,10 +102,12 @@ public class UploadServiceImpl implements UploadService {
             rackSpace.setHeight(Double.parseDouble(rack[4]));
             rackSpace.setMaxWeight(Double.parseDouble(rack[5]));
             rackSpace.setPriority(Integer.parseInt(rack[6]));
+            rackSpace.setSeller(seller);
             rackSpaceRepository.save(rackSpace);
         }
         return ResponseEntity.ok("File was upload");
     }
+
 
     private List<String> readFile(MultipartFile multipart) {
         BufferedReader br;
