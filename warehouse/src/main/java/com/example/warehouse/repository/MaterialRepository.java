@@ -11,4 +11,6 @@ import java.util.List;
 public interface MaterialRepository extends JpaRepository<Material, Long> {
     List<Material> findBySeller(Seller seller);
 
+    Material findById(long id);
+
 }

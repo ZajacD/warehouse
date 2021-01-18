@@ -30,6 +30,10 @@ import { NgxPermissionModule } from 'ngx-permission/ngx-permission.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { RackSpacesComponent } from './admin/rackSpaces/rack.spaces.component';
+import { AddRackSpacesComponent } from './admin/addRackSpace/add.rack.spaces.component';
+import { EditRackSpacesComponent } from './admin/editRackSpace/edit.rack.spaces.component';
+import { AddMaterialComponent } from './admin/addMaterial/add.material.component';
+import { EditMaterialComponent } from './admin/editMaterial/edit.material.component';
 
 
 
@@ -48,7 +52,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     UploadMaterialComponent,
     UploadRackPlaceComponent,
     MaterialsComponent,
-    RackSpacesComponent
+    RackSpacesComponent,
+    AddRackSpacesComponent,
+    EditRackSpacesComponent,
+    AddMaterialComponent,
+    EditMaterialComponent
   ],
   imports: [
     BrowserModule,

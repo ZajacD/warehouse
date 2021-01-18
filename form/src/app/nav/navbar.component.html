@@ -28,7 +28,7 @@
 
             <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/uploadRackSpace']" class="nav-item newFont">
                 <div>
-                    <a class="nav-link newFont">Dodaj miejsca regałowe</a>
+                    <a class="nav-link newFont">Wgraj miejsca regałowe</a>
                 </div>
             </li>
         </ul>
@@ -45,6 +45,23 @@
             <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/rackSpaces']" class="nav-item newFont">
                 <div>
                     <a class="nav-link newFont">Miejsca regałowe</a>
+                </div>
+            </li>
+        </ul>
+        <ul *onlyForRoles="['ROLE_ADMIN']" class="navbar-nav mr-auto">
+
+            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/addRackSpaces']" class="nav-item newFont">
+                <div>
+                    <a class="nav-link newFont">Dodaj miejsce regałowe</a>
+                </div>
+            </li>
+        </ul>
+
+        <ul *onlyForRoles="['ROLE_ADMIN']" class="navbar-nav mr-auto">
+
+            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/addMaterial']" class="nav-item newFont">
+                <div>
+                    <a class="nav-link newFont">Dodaj material</a>
                 </div>
             </li>
         </ul>

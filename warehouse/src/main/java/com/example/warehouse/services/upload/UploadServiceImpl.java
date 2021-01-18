@@ -46,7 +46,8 @@ public class UploadServiceImpl implements UploadService {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
                     .body("Nof lines were not accepted");
-        }       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
         User user = userRepository.findByLogin(name).get();
 

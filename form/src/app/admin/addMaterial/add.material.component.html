@@ -1,0 +1,95 @@
+<form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value)">
+
+    <div class="add_border">
+        <div class="row">
+            <div class="col-6">
+                Numer material
+                <mat-form-field class="example-full-width">
+                    <input matInput formControlName="nofMaterial" [(ngModel)]="material.nofMaterial">
+                    <mat-error *ngIf="myForm.controls.nofMaterial.invalid && myForm.controls.nofMaterial.touched">
+                        Numer materialu jest wymagana
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                Szerokość
+                <mat-form-field class="example-full-width">
+                    <input matInput formControlName="width" [(ngModel)]="material.width">
+                    <mat-error *ngIf="myForm.controls.width.invalid && myForm.controls.width.touched" translate>
+                        Szerokość jest wymagana
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-6">
+                Wysokość
+                <mat-form-field class="example-full-width">
+                    <input matInput formControlName="height" [(ngModel)]="material.height">
+                    <mat-error *ngIf="myForm.controls.height.invalid && myForm.controls.height.touched" translate>
+                        Wysokość jest wymagana
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-6">
+                Długość
+                <mat-form-field class="example-full-width">
+                    <input matInput formControlName="length" [(ngModel)]="material.length">
+                    <mat-error *ngIf="myForm.controls.length.invalid && myForm.controls.length.touched">
+                        Długość jest wymagana
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-6">
+                Waga
+                <mat-form-field class="example-full-width">
+                    <input matInput formControlName="weight" [(ngModel)]="material.weight">
+                    <mat-error *ngIf="myForm.controls.weight.invalid && myForm.controls.weight.touched">
+                        Waga jest wymagana
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                Priorytet
+                <mat-form-field class="example-full-width">
+                    <input matInput formControlName="priority" [(ngModel)]="material.priority">
+                    <mat-error *ngIf="myForm.controls.priority.invalid && myForm.controls.priority.touched">
+                        Priorytet jest wymagana
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-6">
+                Dostawca
+                <mat-form-field class="example-full-width">
+                    <input matInput formControlName="supplier" [(ngModel)]="material.supplier">
+                    <mat-error *ngIf="myForm.controls.supplier.invalid && myForm.controls.supplier.touched">
+                        Dostawca jest wymagana
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                Kraj dostawcy
+                <mat-form-field class="example-full-width">
+                    <input matInput formControlName="supplierCountry" [(ngModel)]="material.supplierCountry">
+                    <mat-error *ngIf="myForm.controls.supplierCountry.invalid && myForm.controls.supplierCountry.touched">
+                        Kraj dostawcy jest wymagana
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row" style="margin-left:90%;float: right;">
+                <button type="submit" class="btn btn-success btn-sm">Zapisz</button>
+            </div>
+        </div>
+
+
+    </div>
+</form>

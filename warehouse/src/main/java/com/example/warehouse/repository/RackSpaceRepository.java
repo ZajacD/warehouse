@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface RackSpaceRepository extends JpaRepository<RackSpace, Long> {
 
+    RackSpace findById(long id);
+
     List<RackSpace> findBySeller(Seller seller);
 
 }

@@ -5,9 +5,8 @@ import com.example.warehouse.model.Material;
 import com.example.warehouse.payload.request.MaterialRequest;
 import com.example.warehouse.services.material.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +20,22 @@ public class MaterialController {
     @GetMapping(value = "/api/materials")
     public List<MaterialRequest> materials() {
         return materialService.materials();
+    }
+
+    @PostMapping(value = "/api/material")
+    public ResponseEntity<?> addRackSpace(@RequestBody Material material) {
+        return materialService.addMaterial(material);
+    }
+
+    @GetMapping(value = "/api/material/{id}")
+    public MaterialRequest getMaterialRequests(@PathVariable long id) {
+        return materialService.getMaterial(id);
+
+    }
+
+    @DeleteMapping(value = "/api/material/{id}")
+    public void deleteMaterialRequests(@PathVariable long id) {
+        materialService.deleteMaterial(id);
+
     }
 }

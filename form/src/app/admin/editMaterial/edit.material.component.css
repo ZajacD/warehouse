@@ -1,0 +1,54 @@
+#PositionsOnFacture {
+    margin-top: 40px;
+}
+
+.TopMargin {
+    margin-top: 30px;
+}
+
+.example-full-width {
+    margin-top: 1%;
+}
+
+.fa-caret-down {
+    color: red;
+}
+
+.add_border {
+    border-radius: 5px;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(141, 141, 141);
+    margin: 5%;
+    padding: 2%;
+}
+
+.save_button {
+    float: right;
+}
+
+.sum_border_left {
+    border-left: 1px;
+    border-top: 1px;
+    border-bottom: 1px;
+    border-right: 0px;
+    border-style: solid;
+    border-color: rgb(88, 88, 88);
+}
+
+.sum_border_right {
+    border-right: 1px;
+    border-left: 0px;
+    border-top: 1px;
+    border-style: solid;
+    border-color: rgb(88, 88, 88);
+}
+
+.sum_border_mid {
+    border-bottom: 1px;
+    border-top: 1px;
+    border-right: 0px;
+    border-left: 0px;
+    border-style: solid;
+    border-color: rgb(88, 88, 88);
+}

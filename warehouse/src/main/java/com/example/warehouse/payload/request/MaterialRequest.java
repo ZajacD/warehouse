@@ -12,7 +12,7 @@ public class MaterialRequest {
         this.weight = material.getWeight();
         this.height = material.getHeight();
         this.length = material.getLength();
-        this.weight = material.getWeight();
+        this.width = material.getWidth();
         this.dateOfUse = material.getDateOfUse();
         this.priority = material.getPriority();
         this.supplier = material.getSupplier();
