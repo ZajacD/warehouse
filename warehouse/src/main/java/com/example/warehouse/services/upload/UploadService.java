@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UploadService {
 
-    ResponseEntity<?> uploadMaterials(MultipartFile multipartFile);
-    ResponseEntity<?> uploadRackPlace(MultipartFile multipartFile);
+    ResponseEntity<?> uploadMaterials(MultipartFile multipartFile, long id);
+    ResponseEntity<?> uploadRackPlace(MultipartFile multipartFile, long id);
 
 }

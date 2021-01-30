@@ -1,6 +1,7 @@
 package com.example.warehouse.controller;
 
 import com.example.warehouse.model.User;
+import com.example.warehouse.payload.request.AddUserRequest;
 import com.example.warehouse.payload.request.LoginRequest;
 import com.example.warehouse.payload.response.JwtResponse;
 import com.example.warehouse.security.jwt.JwtUtils;
@@ -70,5 +71,30 @@ public class UserController {
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 roles));
+    }
+
+    @PostMapping("/api/addUser")
+    public ResponseEntity<?> addUser( @RequestBody AddUserRequest addUserRequest) {
+        System.out.println(addUserRequest.getUsername());
+        System.out.println(addUserRequest.getPassword());
+        System.out.println(addUserRequest.getRole());
+
+//        Authentication authentication = authenticationManager.authenticate(
+//
+//                new UsernamePasswordAuthenticationToken(addUserRequest.getUsername(), addUserRequest.getPassword()));
+//
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        String jwt = jwtUtils.generateJwtToken(authentication);
+//        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+//        List<String> roles = userDetails.getAuthorities().stream()
+//                .map(item -> item.getAuthority())
+//                .collect(Collectors.toList());
+//
+//        return ResponseEntity.ok(new JwtResponse(jwt,
+//                userDetails.getId(),
+//                userDetails.getUsername(),
+//                userDetails.getEmail(),
+//                roles));
+        return registerService.addUser(addUserRequest);
     }
 }

@@ -35,7 +35,7 @@ public class UploadServiceImpl implements UploadService {
     private SellerRepository sellerRepository;
 
     @Override
-    public ResponseEntity<?> uploadMaterials(MultipartFile file) {
+    public ResponseEntity<?> uploadMaterials(MultipartFile file, long id) {
         if (file.isEmpty()) {
             return (ResponseEntity<?>) ResponseEntity.noContent();
         }
@@ -47,9 +47,8 @@ public class UploadServiceImpl implements UploadService {
                     .status(HttpStatus.CONFLICT)
                     .body("Nof lines were not accepted");
         }
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        User user = userRepository.findByLogin(name).get();
+        User user = userRepository.findById(id).get();
+
 
 
         Seller seller = user.getSeller();
@@ -76,7 +75,7 @@ public class UploadServiceImpl implements UploadService {
     }
 
     @Override
-    public ResponseEntity<?> uploadRackPlace(MultipartFile file) {
+    public ResponseEntity<?> uploadRackPlace(MultipartFile file, long id) {
         if (file.isEmpty()) {
             return (ResponseEntity<?>) ResponseEntity.noContent();
         }
@@ -87,9 +86,8 @@ public class UploadServiceImpl implements UploadService {
                     .status(HttpStatus.CONFLICT)
                     .body("Nof lines were not accepted");
         }
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        User user = userRepository.findByLogin(name).get();
+
+        User user = userRepository.findById(id).get();
 
 
         Seller seller = user.getSeller();
