@@ -36,6 +36,11 @@ public class MaterialController {
     @DeleteMapping(value = "/api/material/{id}")
     public void deleteMaterialRequests(@PathVariable long id) {
         materialService.deleteMaterial(id);
+    }
 
+    @PutMapping(value = "/api/supply")
+    public ResponseEntity<?> supply(@RequestBody Material material) {
+        System.out.println("material" + material.getNofMaterial());
+        return materialService.supply(material);
     }
 }

@@ -14,7 +14,8 @@ public class RackSpace {
 
     private String rackId;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private RackSpaceStatus status;
     private double width;
     private double height;
     private double length;
@@ -40,11 +41,11 @@ public class RackSpace {
         this.rackId = rackId;
     }
 
-    public String getStatus() {
+    public RackSpaceStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(RackSpaceStatus status) {
         this.status = status;
     }
 

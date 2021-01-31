@@ -36,7 +36,6 @@ export class EditMaterialComponent implements OnInit {
 
     });
     this.idOfMaterial = this.route.snapshot.params['id'];
-    console.log(this.idOfMaterial);
     this.http.get<any>(environment.API_URL + "/api/material/" + this.idOfMaterial, { headers: new HttpHeaders().set('Authorization', localStorage.getItem('auth_token')).append("Content-Type", "application/json") }).subscribe(value => {
       this.material.id = value.id;
       this.material.width = value.width;

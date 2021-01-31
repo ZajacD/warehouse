@@ -1,6 +1,7 @@
 package com.example.warehouse.services.rackSpace;
 
 import com.example.warehouse.model.RackSpace;
+import com.example.warehouse.model.RackSpaceStatus;
 import com.example.warehouse.model.Seller;
 import com.example.warehouse.model.User;
 import com.example.warehouse.payload.request.RackSpaceRequest;
@@ -43,7 +44,7 @@ public class RackSpaceServiceImpl implements RackSpaceService {
         User user = userRepository.findByLogin(name).get();
         Seller seller = user.getSeller();
         rackSpace.setSeller(seller);
-        rackSpace.setStatus("wolne");
+        rackSpace.setStatus(RackSpaceStatus.Wolny);
         rackSpaceRepository.save(rackSpace);
         return ResponseEntity.ok("RackSpace was save");
     }
@@ -56,6 +57,24 @@ public class RackSpaceServiceImpl implements RackSpaceService {
     @Override
     public void deleteRackSpace(long id) {
         rackSpaceRepository.deleteById(id);
+    }
+
+    @Override
+    public void takeIt(long id) {
+        RackSpace rackSpace= rackSpaceRepository.findById(id);
+        if(rackSpace.getStatus().equals(RackSpaceStatus.Zarezerwowany)){
+            rackSpace.setStatus(RackSpaceStatus.Zajety);
+        }
+        rackSpaceRepository.save(rackSpace);
+    }
+
+    @Override
+    public void freeUp(long id) {
+        RackSpace rackSpace= rackSpaceRepository.findById(id);
+        if(rackSpace.getStatus().equals(RackSpaceStatus.Zajety)){
+            rackSpace.setStatus(RackSpaceStatus.Wolny);
+        }
+        rackSpaceRepository.save(rackSpace);
     }
 
 }

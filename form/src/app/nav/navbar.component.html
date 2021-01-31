@@ -24,6 +24,14 @@
                 </div>
             </li>
         </ul>
+        <ul *onlyForRoles="['ROLE_MANAGER']" class="navbar-nav mr-auto">
+
+            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/supply']" class="nav-item">
+                <div>
+                    <a class="nav-link newFont ">Dostawa</a>
+                </div>
+            </li>
+        </ul>
         <ul *onlyForRoles="['ROLE_ADMIN']" class="navbar-nav mr-auto">
 
             <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/uploadRackSpace']" class="nav-item newFont">
@@ -32,7 +40,7 @@
                 </div>
             </li>
         </ul>
-        <ul *onlyForRoles="['ROLE_ADMIN']" class="navbar-nav mr-auto">
+        <ul *onlyForRoles="['ROLE_ADMIN','ROLE_USER','ROLE_MANAGER']" class="navbar-nav mr-auto">
 
             <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/materials']" class="nav-item">
                 <div>
@@ -40,7 +48,7 @@
                 </div>
             </li>
         </ul>
-        <ul *onlyForRoles="['ROLE_ADMIN']" class="navbar-nav mr-auto">
+        <ul *onlyForRoles="['ROLE_ADMIN','ROLE_USER','ROLE_MANAGER']" class="navbar-nav mr-auto">
 
             <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/rackSpaces']" class="nav-item newFont">
                 <div>
@@ -62,6 +70,22 @@
             <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/addMaterial']" class="nav-item newFont">
                 <div>
                     <a class="nav-link newFont">Dodaj material</a>
+                </div>
+            </li>
+        </ul>
+        <ul *onlyForRoles="['ROLE_ADMIN']" class="navbar-nav mr-auto">
+
+            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/addUser']" class="nav-item newFont">
+                <div>
+                    <a class="nav-link newFont">Dodaj użytkownika</a>
+                </div>
+            </li>
+        </ul>
+        <ul *onlyForRoles="['ROLE_ADMIN','ROLE_USER','ROLE_MANAGER']" class="navbar-nav mr-auto">
+
+            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/login']" class="nav-item newFont">
+                <div>
+                    <a class="nav-link newFont">Wyloguj</a>
                 </div>
             </li>
         </ul>

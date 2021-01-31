@@ -1,9 +1,6 @@
 package com.example.warehouse.services.upload;
 
-import com.example.warehouse.model.Material;
-import com.example.warehouse.model.RackSpace;
-import com.example.warehouse.model.Seller;
-import com.example.warehouse.model.User;
+import com.example.warehouse.model.*;
 import com.example.warehouse.repository.MaterialRepository;
 import com.example.warehouse.repository.RackSpaceRepository;
 import com.example.warehouse.repository.SellerRepository;
@@ -11,8 +8,6 @@ import com.example.warehouse.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -95,7 +90,7 @@ public class UploadServiceImpl implements UploadService {
             String[] rack = line.split(";");
             RackSpace rackSpace = new RackSpace();
             rackSpace.setRackId(rack[0]);
-            rackSpace.setStatus(rack[1]);
+            rackSpace.setStatus(RackSpaceStatus.Wolny);
             rackSpace.setWidth(Double.parseDouble(rack[2]));
             rackSpace.setLength(Double.parseDouble(rack[3]));
             rackSpace.setHeight(Double.parseDouble(rack[4]));

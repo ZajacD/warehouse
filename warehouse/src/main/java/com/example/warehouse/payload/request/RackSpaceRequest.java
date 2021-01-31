@@ -7,7 +7,7 @@ public class RackSpaceRequest {
     public RackSpaceRequest(RackSpace rackSpace) {
         this.id = rackSpace.getId();
         this.rackId = rackSpace.getRackId();
-        this.status = rackSpace.getStatus();
+        this.status = rackSpace.getStatus().toString();
         this.width = rackSpace.getWidth();
         this.height = rackSpace.getHeight();
         this.length = rackSpace.getLength();

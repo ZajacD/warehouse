@@ -3,6 +3,8 @@ import { Component, EventEmitter, OnInit, Output, } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { couldStartTrivia } from 'typescript';
+import { RackSpace } from 'src/app/model/rackSpace';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,11 @@ export class RackSpacesComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) {
   }
   ngOnInit() {
+    if (localStorage.getItem("permissions").includes("ROLE_ADMIN")) {
+      this.displayedColumns = ['no', 'nofRack', 'height', 'length', 'width', 'weight', 'status', 'priority', 'edit', 'delete'];
+    } else if (localStorage.getItem("permissions").includes("ROLE_USER")) {
+      this.displayedColumns = ['no', 'nofRack', 'height', 'length', 'width', 'weight', 'status', 'priority', 'save', 'free'];
+    }
     this.http.get<any>(environment.API_URL + "/api/rackSpaces", { headers: new HttpHeaders().set('Authorization', localStorage.getItem('auth_token')).append("Content-Type", "application/json") }).subscribe(value => {
       this.allMaterials = value;
       console.log(this.allMaterials);
@@ -56,5 +63,20 @@ export class RackSpacesComponent implements OnInit {
       this.ngOnInit();
     });
 
+  }
+  save(element) {
+    var rackSpace= new RackSpace();
+    rackSpace.id=element.id;
+    this.http.put<any>(environment.API_URL + "/api/rackSpace/take/" + element.id,rackSpace, { headers: new HttpHeaders().set('Authorization', localStorage.getItem('auth_token')).append("Content-Type", "application/json") }).subscribe(value => {
+      this.ngOnInit();
+    });
+  }
+  free(element) {
+    console.log(element);
+    var rackSpace= new RackSpace();
+    rackSpace.id=element.id;
+    this.http.put<any>(environment.API_URL + "/api/rackSpace/free/" + element.id,rackSpace, { headers: new HttpHeaders().set('Authorization', localStorage.getItem('auth_token')).append("Content-Type", "application/json") }).subscribe(value => {
+      this.ngOnInit();
+    });
   }
 }

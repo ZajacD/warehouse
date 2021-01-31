@@ -38,7 +38,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('permissions');
+    localStorage.removeItem('user_id');
 
   }
   newPassword() {
@@ -54,6 +56,7 @@ export class LoginComponent implements OnInit {
         console.log(data)
         localStorage.setItem('auth_token', "BearerJWT " + data.accessToken);
         localStorage.setItem('permissions', data.roles);
+        localStorage.setItem('user_id', data.id);
         this.router.navigate(['uploadMaterial']);
       },
       err => {

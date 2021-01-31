@@ -9,6 +9,8 @@ import { AddRackSpacesComponent } from './admin/addRackSpace/add.rack.spaces.com
 import { EditRackSpacesComponent } from './admin/editRackSpace/edit.rack.spaces.component';
 import { AddMaterialComponent } from './admin/addMaterial/add.material.component';
 import { EditMaterialComponent } from './admin/editMaterial/edit.material.component';
+import { AddUserComponent } from './admin/addUser/add.user.component';
+import { SupplyComponent } from './supply/supply.component';
 
 export const appRoutes = [
   // { path: '', component: MainComponent },
@@ -23,6 +25,9 @@ export const appRoutes = [
   { path: 'editRackSpaces/:id', component: EditRackSpacesComponent },
   { path: 'addMaterial', component: AddMaterialComponent },
   { path: 'editMaterial/:id', component: EditMaterialComponent },
+  { path: 'addUser', component: AddUserComponent },
+  { path: 'supply', component: SupplyComponent },
+
 
 
 

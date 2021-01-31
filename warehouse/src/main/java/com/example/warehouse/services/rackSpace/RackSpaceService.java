@@ -16,5 +16,8 @@ public interface RackSpaceService {
 
     void deleteRackSpace(long id);
 
+    void takeIt(long id);
+    void freeUp(long id);
+
 
 }

@@ -84,64 +84,6 @@ export class NavbarComponent implements OnInit {
   }
 
   onSelect($event, input) {
-    $event.preventDefault();
-    switch ($event.item) {
-      case "Dodaj nową fakturę VAT":
-
-        this.router.navigate(['/invoices/new']);
-        break;
-
-      case "Dodaj nową fakturę Proforma":
-
-        this.router.navigate(['createProformaInvoice']);
-        break;
-
-      case "Zobacz wszystkie faktury":
-        this.router.navigate(['/invoices']);
-        this.model = '';
-        break;
-
-      case "Raporty":
-        this.router.navigate(['/raporty']);
-        this.model = '';
-        break;
-
-      case "Historia - raporty":
-        this.router.navigate(['/hreports']);
-        this.model = '';
-        break;
-
-      case "Historia - wszystkie faktury":
-        this.router.navigate(['/history']);
-        this.model = '';
-        break;
-
-      case "Dodaj nowego klienta":
-        this.router.navigate(['/clients/new']);
-        this.model = '';
-        break;
-
-      case "Ustawienia użytkownika":
-        this.router.navigate(['/user/create']);
-        this.model = '';
-        break;
-
-      case "Dane firmy":
-        this.router.navigate(['/settings']);
-        this.settingsMenuOn = true;
-        this.model = '';
-        break;
-
-      case "Dodaj nowy produkt":
-        this.router.navigate(['/item/new']);
-        this.model = '';
-        break;
-
-
-      default:
-    }
-    this.model = '';
   }
 }
 
-const states = ['Dodaj nową fakturę VAT', 'Dodaj nową fakturę Proforma', "Zobacz wszystkie faktury", "Raporty", "Historia - raporty", "Historia - wszystkie faktury", "Dodaj nowego klienta", "Ustawienia użytkownika", "Dane firmy", "Dodaj nowy produkt"];

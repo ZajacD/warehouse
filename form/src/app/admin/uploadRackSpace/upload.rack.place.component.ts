@@ -62,7 +62,7 @@ export class UploadRackPlaceComponent implements OnInit {
       console.log(headers)
 
 
-      this.http.post(environment.API_URL + "/api/uploadRackSpace", formData, { headers: headers }).pipe(
+      this.http.post(environment.API_URL + "/api/uploadRackSpace/" + localStorage.getItem("user_id"), formData, { headers: headers }).pipe(
         catchError(error => observableThrowError(error)))
         .subscribe(data => {
       

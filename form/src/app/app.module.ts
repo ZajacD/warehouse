@@ -34,7 +34,9 @@ import { AddRackSpacesComponent } from './admin/addRackSpace/add.rack.spaces.com
 import { EditRackSpacesComponent } from './admin/editRackSpace/edit.rack.spaces.component';
 import { AddMaterialComponent } from './admin/addMaterial/add.material.component';
 import { EditMaterialComponent } from './admin/editMaterial/edit.material.component';
+import { AddUserComponent } from './admin/addUser/add.user.component';
 
+import { SupplyComponent } from './supply/supply.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -56,7 +58,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddRackSpacesComponent,
     EditRackSpacesComponent,
     AddMaterialComponent,
-    EditMaterialComponent
+    EditMaterialComponent,
+    AddUserComponent,
+    SupplyComponent
   ],
   imports: [
     BrowserModule,

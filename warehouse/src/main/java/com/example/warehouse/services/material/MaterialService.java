@@ -15,4 +15,5 @@ public interface MaterialService {
     MaterialRequest getMaterial(long id);
 
     void deleteMaterial(long id);
+    ResponseEntity<?> supply(Material material);
 }

@@ -62,7 +62,7 @@ export class UploadMaterialComponent implements OnInit {
       console.log(headers)
 
 
-      this.http.post(environment.API_URL + "/api/uploadMaterial", formData, { headers: headers }).pipe(
+      this.http.post(environment.API_URL + "/api/uploadMaterial/" + localStorage.getItem("user_id"), formData, { headers: headers }).pipe(
         catchError(error => observableThrowError(error)))
         .subscribe(data => {
       
