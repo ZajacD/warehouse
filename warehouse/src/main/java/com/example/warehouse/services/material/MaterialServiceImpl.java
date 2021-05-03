@@ -19,9 +19,11 @@ import java.util.stream.Collectors;
 @Service
 public class MaterialServiceImpl implements MaterialService {
 
+    private final long handlingClearance = 20;
+    private final long optimizationFactor = 10;
+
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private MaterialRepository materialRepository;
     @Autowired
@@ -32,8 +34,6 @@ public class MaterialServiceImpl implements MaterialService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
         User user = userRepository.findByLogin(name).get();
-        System.out.println(user.getEmail());
-        System.out.println(user.getSeller().getEmail());
         Seller seller = user.getSeller();
         List<Material> materials = materialRepository.findBySeller(seller);
         return materials.stream().map(MaterialRequest::new).collect(Collectors.toList());
@@ -68,15 +68,13 @@ public class MaterialServiceImpl implements MaterialService {
         String name = auth.getName();
         User user = userRepository.findByLogin(name).get();
         Seller seller = user.getSeller();
-        material = materialRepository.findFirstByNofMaterial(material.getNofMaterial()).orElseThrow(() -> new RuntimeException("Error: NofMaterial is not found."));
-        int priorityLimit = rackSpaceRepository.findFirstBySellerOrderByPriorityDesc(seller).getPriority();
-        final Material deliveredMaterial = material;
+        final Material deliveredMaterial = materialRepository.findFirstByNofMaterial(material.getNofMaterial()).orElseThrow(() -> new RuntimeException("Error: NofMaterial is not found."));
+        int maxPriority = rackSpaceRepository.findFirstBySellerOrderByPriorityDesc(seller).getPriority();
         int priority = material.getPriority();
+        deliveredMaterial.setHeight(deliveredMaterial.getHeight() + handlingClearance);
         boolean isSaved = false;
         boolean limitExceeded = false;
-        System.out.println(priorityLimit + "limit");
         do {
-            System.out.println(priority + "pr");
             List<RackSpace> rackSpaces = rackSpaceRepository.findBySellerAndPriorityAndStatus(seller, priority, RackSpaceStatus.Wolny);
             if (!Collections.isEmpty(rackSpaces)) {
                 rackSpaces = rackSpaces.stream().filter(rackSpace -> rackSpace.getHeight() >= deliveredMaterial.getHeight())
@@ -85,6 +83,17 @@ public class MaterialServiceImpl implements MaterialService {
                         .filter(rackSpace -> rackSpace.getWidth() >= deliveredMaterial.getWidth())
                         .collect(Collectors.toList());
                 if (!Collections.isEmpty(rackSpaces)) {
+                    List<RackSpace> optimizedRackSpaces;
+                    int iterator = 1;
+                    do {
+                        final long optimizationFactorForThisIterator = iterator * optimizationFactor;
+                        optimizedRackSpaces = rackSpaces.stream().filter(rackSpace -> rackSpace.getHeight() + optimizationFactorForThisIterator <= deliveredMaterial.getHeight())
+                                .filter(rackSpace -> rackSpace.getLength() + optimizationFactorForThisIterator <= deliveredMaterial.getLength())
+                                .filter(rackSpace -> rackSpace.getMaxWeight() + optimizationFactorForThisIterator <= deliveredMaterial.getWeight())
+                                .filter(rackSpace -> rackSpace.getWidth() + optimizationFactorForThisIterator <= deliveredMaterial.getWidth())
+                                .collect(Collectors.toList());
+                        iterator++;
+                    } while (Collections.isEmpty(optimizedRackSpaces));
                     RackSpace rackSpace = rackSpaces.get(0);
                     rackSpace.setStatus(RackSpaceStatus.Zarezerwowany);
                     rackSpaceRepository.save(rackSpace);
@@ -93,7 +102,7 @@ public class MaterialServiceImpl implements MaterialService {
                     isSaved = true;
                 }
             }
-            if (priority >= priorityLimit) {
+            if (priority >= maxPriority) {
                 limitExceeded = true;
             }
             priority++;

@@ -30,7 +30,6 @@ public class MaterialController {
     @GetMapping(value = "/api/material/{id}")
     public MaterialRequest getMaterialRequests(@PathVariable long id) {
         return materialService.getMaterial(id);
-
     }
 
     @DeleteMapping(value = "/api/material/{id}")
@@ -40,7 +39,6 @@ public class MaterialController {
 
     @PutMapping(value = "/api/supply")
     public ResponseEntity<?> supply(@RequestBody Material material) {
-        System.out.println("material" + material.getNofMaterial());
         return materialService.supply(material);
     }
 }

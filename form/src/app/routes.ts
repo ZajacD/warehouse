@@ -13,11 +13,13 @@ import { AddUserComponent } from './admin/addUser/add.user.component';
 import { SupplyComponent } from './supply/supply.component';
 
 export const appRoutes = [
-  // { path: '', component: MainComponent },
   { path: 'login', component: LoginComponent },
-
   { path: 'registration', component: RegisterComponent },
-  { path: 'uploadMaterial', component: UploadMaterialComponent, canActivate: [AuthGuard], data: { expectedRole: 'ROLE_ADMIN' } },
+  {
+    path: 'uploadMaterial', component: UploadMaterialComponent,
+    canActivate: [AuthGuard],
+    data: { expectedRole: 'ROLE_ADMIN' }
+  },
   { path: 'uploadRackSpace', component: UploadRackPlaceComponent },
   { path: 'materials', component: MaterialsComponent },
   { path: 'rackSpaces', component: RackSpacesComponent },
@@ -27,8 +29,4 @@ export const appRoutes = [
   { path: 'editMaterial/:id', component: EditMaterialComponent },
   { path: 'addUser', component: AddUserComponent },
   { path: 'supply', component: SupplyComponent },
-
-
-
-
 ]

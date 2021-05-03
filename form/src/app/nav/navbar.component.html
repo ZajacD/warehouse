@@ -110,12 +110,12 @@
             </li>
         </ul>
 
-        <ul class="navbar-nav mr-auto">
-            <li *ngIf="!isLogged && !registrationInProgress " class="nav-item newFont">
+        <ul class="navbar-nav ">
+            <li style="text-align: right; position: right; float:left" *ngIf="!isLogged && !registrationInProgress " class="nav-item newFont">
                 <a class="nav-link" [routerLink]="['/registration']">Zarejestruj się</a>
             </li>
 
-            <li *ngIf="!isLogged" class="nav-item newFont">
+            <li style="text-align: right; position: right; float:left" *ngIf="!isLogged" class="nav-item newFont">
                 <a class="nav-link" [routerLink]="['/login']">Logowanie</a>
             </li>
 

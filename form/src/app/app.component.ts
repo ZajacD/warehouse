@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Role} from "ngx-permission/types/role.type";
 import {RoleStoreService} from "ngx-permission/services/role-store/role-store.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,16 @@ import {RoleStoreService} from "ngx-permission/services/role-store/role-store.se
 })
 export class AppComponent implements OnInit {
 
-  constructor( roleStoreService: RoleStoreService,) {
-    console.log(localStorage.getItem("permissions"));
+  constructor( public router: Router,roleStoreService: RoleStoreService,) {
+      router.events.subscribe(value => {
+      console.log("www");
+      
+    });
     const adminRole: Role = {
       name: 'ROLE_ADMIN',
       validationFunction: () => {
         let permissions = localStorage.getItem("permissions");
+        console.log(permissions.includes("ROLE_ADMIN"));
 
         if (permissions === null) {
           return false;

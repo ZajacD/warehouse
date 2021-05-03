@@ -10,8 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface MaterialRepository extends JpaRepository<Material, Long> {
-    List<Material> findBySeller(Seller seller);
 
+    List<Material> findBySeller(Seller seller);
     Material findById(long id);
     Optional<Material> findFirstByNofMaterial(long id);
 

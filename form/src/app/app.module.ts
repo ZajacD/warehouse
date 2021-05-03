@@ -35,6 +35,7 @@ import { EditRackSpacesComponent } from './admin/editRackSpace/edit.rack.spaces.
 import { AddMaterialComponent } from './admin/addMaterial/add.material.component';
 import { EditMaterialComponent } from './admin/editMaterial/edit.material.component';
 import { AddUserComponent } from './admin/addUser/add.user.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { SupplyComponent } from './supply/supply.component';
 
@@ -80,7 +81,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpModule,
     NgxPermissionModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule,
   ],
   providers: [
     ValidationService,

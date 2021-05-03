@@ -6,7 +6,7 @@
           {{userName}}
         </a>
                 <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right newFont" aria-labelledby="dropdownBasic3">
-                    <button style="cursor:pointer;" [routerLink]="['/login']" class="dropdown-item newFont" translate>
+                    <button style="cursor:pointer;" [routerLink]="['/login']" (click)="logout()" class="dropdown-item newFont" translate>
             Navbar.LogOut
           </button>
 

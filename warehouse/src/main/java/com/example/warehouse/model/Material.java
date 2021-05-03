@@ -12,7 +12,6 @@ public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private Long nofMaterial;
     private double width;
     private double height;
@@ -25,14 +24,11 @@ public class Material {
     private String status;
     @ManyToOne
     private Seller seller;
-
     @OneToOne
     private RackSpace rackSpace;
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }

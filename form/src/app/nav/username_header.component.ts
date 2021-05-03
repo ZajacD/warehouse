@@ -38,4 +38,8 @@ export class UsernameHeaderComponent implements OnInit {
     localStorage.setItem("selectedCompany", value);
     this.router.navigate(["/main"]);
   }
+  logout() {
+    window.location.reload(true);
+
+  }
 }
