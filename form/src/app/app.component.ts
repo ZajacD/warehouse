@@ -19,8 +19,6 @@ export class AppComponent implements OnInit {
       name: 'ROLE_ADMIN',
       validationFunction: () => {
         let permissions = localStorage.getItem("permissions");
-        console.log(permissions.includes("ROLE_ADMIN"));
-
         if (permissions === null) {
           return false;
         }

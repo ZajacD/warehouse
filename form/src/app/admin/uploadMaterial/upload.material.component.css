@@ -1,0 +1,10 @@
+.add_border {
+    border-radius: 5px;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(141, 141, 141);
+    margin: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 2%;
+}

@@ -23,6 +23,7 @@ export class UploadMaterialComponent implements OnInit {
   public file;
   public document;
   public url;
+  public fileName='';
 
   constructor(private http: HttpClient) {
 
@@ -37,7 +38,9 @@ export class UploadMaterialComponent implements OnInit {
         this.url = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]);
+      console.log(event.target.files[0].name);
       this.file = event;
+      this.fileName = event.target.files[0].name;
     }
   }
 
@@ -65,7 +68,7 @@ export class UploadMaterialComponent implements OnInit {
       this.http.post(environment.API_URL + "/api/uploadMaterial/" + localStorage.getItem("user_id"), formData, { headers: headers }).pipe(
         catchError(error => observableThrowError(error)))
         .subscribe(data => {
-      
+          this.fileName = "Plik zapisany";
 
         }, error => {
 

@@ -8,12 +8,6 @@
     <div class="collapse navbar-collapse" id="collapseExample">
 
 
-        <ul class="navbar-nav mr-auto " *ngIf="isLogged">
-            <a class=" nav-link newFontHeader" [routerLink]="['/main']">Magazyn</a>
-        </ul>
-        <ul class="navbar-nav mr-auto " *ngIf="!isLogged">
-            <a class=" nav-link newFontHeader" [routerLink]="['/']">Magazyn</a>
-        </ul>
 
 
         <ul *onlyForRoles="['ROLE_ADMIN']" class="navbar-nav mr-auto">
@@ -102,16 +96,8 @@
             </li>
         </ul>
 
-        <ul class="navbar-nav mr-auto">
-            <li style="cursor:pointer;" *ngIf="isLogged" [routerLink]="['/settings/rodo']" class="nav-item">
-                <div>
-                    <a class="nav-link newFont ">Ustawienia</a>
-                </div>
-            </li>
-        </ul>
-
-        <ul class="navbar-nav ">
-            <li style="text-align: right; position: right; float:left" *ngIf="!isLogged && !registrationInProgress " class="nav-item newFont">
+        <ul class="navbar-nav " style="float:right">
+            <li style="text-align: right; position: right; float:left" *ngIf="!isLogged && !registrationInProgress" class="nav-item newFont">
                 <a class="nav-link" [routerLink]="['/registration']">Zarejestruj się</a>
             </li>
 

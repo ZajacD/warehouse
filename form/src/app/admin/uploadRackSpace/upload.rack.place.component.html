@@ -1,12 +1,21 @@
-<div class="com-sm-2" style="margin-left: 1.6%;">
-    <div>
-        <h4 style="color:gray; margin-right: 5px; margin-left:2%; margin-bottom:0%; margin-top: 2px; font-weight: bold;">Wgrywanie miejsca palety</h4>
-        <h5 style="color:gray; margin-left:1%;">Wgraj</h5>
-    </div>
-    <div>
-        <input #csvInput hidden="true" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" type="file" [(ngModel)]="document" onclick="this.value=null" (change)="fileChange($event)">
-        <button style="margin-top:1%; margin-left: 0px; float: left;" type="button" mat-flat-button color="primary" (click)="csvInput.click()">Wybierz plik</button>
-    </div>
-    <button style="margin-top:1%; margin-left: 0px; float: left;" type="button" mat-flat-button color="primary" (click)="save()">Zapisz</button>
+<div class="add_border">
 
+    <div class="com-sm-2" style="margin-left: 1.6%;">
+        <div>
+            <h4 style="color:gray; margin-right: 5px; margin-left:2%; margin-bottom:0%; margin-top: 2px; font-weight: bold; text-align:center;">Wgrywanie miejsca palety</h4>
+        </div>
+        <div style="margin-top:5%">
+            <h5 style="text-align:center; color:green;">{{fileName}}</h5>
+        </div>
+        <div class="row" style="margin-top:5%">
+            <div class="col-6">
+                <input #csvInput hidden="true" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" type="file" [(ngModel)]="document" onclick="this.value=null" (change)="fileChange($event)">
+                <button style="margin-top:1%; margin-left: 0px; float: left; margin-left: 10%;" type="button" mat-flat-button color="primary" (click)="csvInput.click()">Wybierz plik</button>
+            </div>
+            <div class="col-6">
+                <button style="margin-top:1%;float: right;margin-right:10%;" type="button" mat-flat-button color="primary" (click)="save()">Zapisz</button>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:5%"></div>
 </div>

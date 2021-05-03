@@ -23,6 +23,7 @@ export class UploadRackPlaceComponent implements OnInit {
   public file;
   public document;
   public url;
+  public fileName = '';
 
   constructor(private http: HttpClient) {
 
@@ -38,6 +39,7 @@ export class UploadRackPlaceComponent implements OnInit {
       }
       reader.readAsDataURL(event.target.files[0]);
       this.file = event;
+      this.fileName = event.target.files[0].name;
     }
   }
 
@@ -65,7 +67,8 @@ export class UploadRackPlaceComponent implements OnInit {
       this.http.post(environment.API_URL + "/api/uploadRackSpace/" + localStorage.getItem("user_id"), formData, { headers: headers }).pipe(
         catchError(error => observableThrowError(error)))
         .subscribe(data => {
-      
+          this.fileName = "Plik zapisany";
+
 
         }, error => {
 

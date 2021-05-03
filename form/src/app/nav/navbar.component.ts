@@ -44,8 +44,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('auth_token') === undefined || localStorage.getItem('auth_token') === null) {
       this.main = false
+      this.isLogged = false;
+      this.registrationInProgress = false;
     } else {
       this.isLogged = true;
+      this.registrationInProgress = true;
     }
   }
 
