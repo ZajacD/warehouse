@@ -43,9 +43,6 @@ public class UploadServiceImpl implements UploadService {
                     .body("Nof lines were not accepted");
         }
         User user = userRepository.findById(id).get();
-
-
-
         Seller seller = user.getSeller();
 
         for (String line : materials) {

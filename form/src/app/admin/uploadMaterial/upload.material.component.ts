@@ -7,6 +7,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { throwError as observableThrowError, Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -25,56 +26,49 @@ export class UploadMaterialComponent implements OnInit {
   public url;
   public fileName='';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public snackBar: MatSnackBar) {
 
   }
   fileChange(event: any) {
     if (event.target.files && event.target.files[0]) {
-      console.log(event);
-      console.log(event.target);
-      console.log(event.target.files);
       const reader = new FileReader();
       reader.onload = (event: any) => {
         this.url = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]);
-      console.log(event.target.files[0].name);
       this.file = event;
       this.fileName = event.target.files[0].name;
     }
   }
 
   save() {
-    console.log(localStorage.getItem('auth_token'));
-    // this.http.get<any>(environment.API_URL + "/api/aaa", { headers: new HttpHeaders().set('Authorization', localStorage.getItem('auth_token')).append("Content-Type", "application/json") }).subscribe(value => {
-    //   console.log("aaaa");
-    //   });
     let fileList: FileList = this.file.target.files;
     if (fileList.length > 0) {
-      console.log(fileList);
       let file: File = fileList[0];
-      console.log(file);
       let formData: FormData = new FormData();
       formData.append('file', file, file.name);
       let headers = new HttpHeaders();
-      // headers.append('Authorization', localStorage.getItem("auth_token"));
       headers.append('Content-Type', 'multipart/form-data');
       headers.append('Accept', 'application/json');
-      console.log(formData);
-      console.log(localStorage.getItem("auth_token"));
-      console.log(headers)
-
 
       this.http.post(environment.API_URL + "/api/uploadMaterial/" + localStorage.getItem("user_id"), formData, { headers: headers }).pipe(
         catchError(error => observableThrowError(error)))
         .subscribe(data => {
           this.fileName = "Plik zapisany";
 
-        }, error => {
+          this.snackBar.open('Plik zapisany poprawnie', '×', { verticalPosition: 'top', duration: 6000 });
 
-        }
+        },
+          error => {
+            if (error.status == 200) {
+              this.snackBar.open('Plik  dodany poprawnie', '×', { verticalPosition: 'top', duration: 6000 });
+            }
+            else {
+              this.snackBar.open('Nie można dodać pliku', '×', { verticalPosition: 'top', duration: 3000 });
+            }
+          });
 
-        )
+        
     }
   }
 }

@@ -3,6 +3,7 @@ import { Component, EventEmitter, OnInit, Output, } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +17,9 @@ export class MaterialsComponent implements OnInit {
   displayItems: any[] = [];
   allMaterialFiler: any[] = [];
   allMaterials: any[] = [];
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, public snackBar: MatSnackBar) {
   }
   ngOnInit() {
-    console.log(localStorage.getItem("permissions"))
     if (localStorage.getItem("permissions").includes("ROLE_ADMIN")) {
       this.displayedColumns = ['no', 'nofMaterial', 'height', 'length', 'width', 'weight', 'supplier', 'supplierCountry', 'priority', 'edit', 'delete']
     } else {
@@ -28,7 +28,6 @@ export class MaterialsComponent implements OnInit {
     }
     this.http.get<any>(environment.API_URL + "/api/materials", { headers: new HttpHeaders().set('Authorization', localStorage.getItem('auth_token')).append("Content-Type", "application/json") }).subscribe(value => {
       this.allMaterials = value;
-      console.log(this.allMaterials);
       this.displayItems = this.allMaterials.slice(0, 10);
     });
   }
@@ -55,13 +54,21 @@ export class MaterialsComponent implements OnInit {
   }
   edit(value) {
     this.router.navigate(['/editMaterial/' + value.id]);
-
-    console.log(value);
   }
   delete(value) {
     this.http.delete<any>(environment.API_URL + "/api/material/" + value.id, { headers: new HttpHeaders().set('Authorization', localStorage.getItem('auth_token')).append("Content-Type", "application/json") }).subscribe(value => {
       this.ngOnInit();
-    });
+      this.snackBar.open('Materiał usuniety poprawnie', '×', { verticalPosition: 'top', duration: 6000 });
+
+    },
+      error => {
+        if (error.status == 200) {
+          this.snackBar.open('Materiał usuniety poprawnie', '×', { verticalPosition: 'top', duration: 6000 });
+        }
+        else {
+          this.snackBar.open('Nie można usuniąć materiału', '×', { verticalPosition: 'top', duration: 3000 });
+        }
+      });
 
   }
   save(value) {

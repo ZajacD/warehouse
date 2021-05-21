@@ -30,8 +30,6 @@ public class RackSpaceServiceImpl implements RackSpaceService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
         User user = userRepository.findByLogin(name).get();
-        System.out.println(user.getEmail());
-        System.out.println(user.getSeller().getEmail());
         Seller seller = user.getSeller();
         List<RackSpace> rackSpaces = rackSpaceRepository.findBySeller(seller);
         return rackSpaces.stream().map(RackSpaceRequest::new).collect(Collectors.toList());

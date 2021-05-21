@@ -20,6 +20,8 @@ import java.util.stream.Collectors;
 public class MaterialServiceImpl implements MaterialService {
 
     private final long handlingClearance = 20;
+    private final long handlingClearanceWeight = 10;
+
     private final long optimizationFactor = 10;
 
     @Autowired
@@ -68,10 +70,13 @@ public class MaterialServiceImpl implements MaterialService {
         String name = auth.getName();
         User user = userRepository.findByLogin(name).get();
         Seller seller = user.getSeller();
+        RackSpace rackSpaceSupply = new RackSpace();
         final Material deliveredMaterial = materialRepository.findFirstByNofMaterial(material.getNofMaterial()).orElseThrow(() -> new RuntimeException("Error: NofMaterial is not found."));
         int maxPriority = rackSpaceRepository.findFirstBySellerOrderByPriorityDesc(seller).getPriority();
         int priority = material.getPriority();
         deliveredMaterial.setHeight(deliveredMaterial.getHeight() + handlingClearance);
+        deliveredMaterial.setWeight(deliveredMaterial.getWeight() + handlingClearanceWeight);
+
         boolean isSaved = false;
         boolean limitExceeded = false;
         do {
@@ -87,17 +92,17 @@ public class MaterialServiceImpl implements MaterialService {
                     int iterator = 1;
                     do {
                         final long optimizationFactorForThisIterator = iterator * optimizationFactor;
-                        optimizedRackSpaces = rackSpaces.stream().filter(rackSpace -> rackSpace.getHeight() + optimizationFactorForThisIterator <= deliveredMaterial.getHeight())
-                                .filter(rackSpace -> rackSpace.getLength() + optimizationFactorForThisIterator <= deliveredMaterial.getLength())
-                                .filter(rackSpace -> rackSpace.getMaxWeight() + optimizationFactorForThisIterator <= deliveredMaterial.getWeight())
-                                .filter(rackSpace -> rackSpace.getWidth() + optimizationFactorForThisIterator <= deliveredMaterial.getWidth())
+                        optimizedRackSpaces = rackSpaces.stream().filter(rackSpace -> (rackSpace.getHeight() - optimizationFactorForThisIterator) >= deliveredMaterial.getHeight())
+                                .filter(rackSpace -> (rackSpace.getLength() - optimizationFactorForThisIterator) >= deliveredMaterial.getLength())
+                                .filter(rackSpace -> (rackSpace.getMaxWeight() - optimizationFactorForThisIterator) >= deliveredMaterial.getWeight())
+                                .filter(rackSpace -> (rackSpace.getWidth() - optimizationFactorForThisIterator) >= deliveredMaterial.getWidth())
                                 .collect(Collectors.toList());
                         iterator++;
                     } while (Collections.isEmpty(optimizedRackSpaces));
-                    RackSpace rackSpace = rackSpaces.get(0);
-                    rackSpace.setStatus(RackSpaceStatus.Zarezerwowany);
-                    rackSpaceRepository.save(rackSpace);
-                    material.setRackSpace(rackSpace);
+                    rackSpaceSupply = optimizedRackSpaces.get(0);
+                    rackSpaceSupply.setStatus(RackSpaceStatus.Zarezerwowany);
+                    rackSpaceRepository.save(rackSpaceSupply);
+                    material.setRackSpace(rackSpaceSupply);
                     materialRepository.save(material);
                     isSaved = true;
                 }
@@ -108,7 +113,7 @@ public class MaterialServiceImpl implements MaterialService {
             priority++;
         } while (!limitExceeded && !isSaved);
         if (isSaved) {
-            return ResponseEntity.ok("Material was booked");
+            return ResponseEntity.ok("Material został zarezerwowany na palecie nr: " + rackSpaceSupply.getRackId());
         } else {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)

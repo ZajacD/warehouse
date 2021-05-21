@@ -7,22 +7,22 @@
             <form class="form-horizontal" [formGroup]="userForm" (ngSubmit)="saveUser(userForm.value)">
                 <div class="form-group row" style="margin-left: 4px;">
                     <div class="col-md-12">
-                        <h4 style="font-weight: bold; text-transform: uppercase;">User data</h4>
+                        <h4 style="font-weight: bold; text-transform: uppercase;">Dane użytkownika</h4>
                         <mat-form-field class="content-width">
                             <mat-label style="font-weight: bold;">Email</mat-label>
                             <mat-label> *</mat-label>
                             <input matInput formControlName="email" [(ngModel)]="user.email" placeholder="Email">
                             <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.touched">
-                                Invalid email
+                                Zły email
                             </mat-error>
                         </mat-form-field>
                         <div>
                             <mat-form-field class="content-width" style="margin-top: 2%;">
-                                <mat-label style="font-weight: bold;">Password</mat-label>
+                                <mat-label style="font-weight: bold;">Hasło</mat-label>
                                 <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 <input matInput #password [type]="hide ? 'password' : 'text'" required [(ngModel)]="user.password" formControlName="password" placeholder="Password">
                                 <mat-error *ngIf="userForm.controls.password.invalid && userForm.controls.password.touched">
-                                    Invalid password
+                                    Złe hasło
                                 </mat-error>
                                 <mat-hint allign="end" aria-live="polite">
                                     {{password.value.length}} / 25
@@ -31,13 +31,14 @@
                             <div class="content-width">
                                 <mat-password-strength #passwordComponent [password]="password.value">
                                 </mat-password-strength>
-                                <mat-password-strength-info [passwordComponent]="passwordComponent">
+                                <mat-password-strength-info lowerCaseCriteriaMsg="Wymagane jest chociaż jedna mała litera" upperCaseCriteriaMsg="wymagana jest chociaż jedna duża litera" digitsCriteriaMsg="wymagana jest chociaż jedna cyfra" specialCharsCriteriaMsg="Wymagany jest minimum jeden specjalny znak"
+                                    minCharsCriteriaMsg="minimum 8 znaków" [passwordComponent]="passwordComponent">>
                                 </mat-password-strength-info>
                             </div>
                         </div>
                         <div>
                             <mat-form-field class="content-width" style="margin-top: 2%;">
-                                <mat-label style="font-weight: bold;">Confirm password</mat-label>
+                                <mat-label style="font-weight: bold;">Potwierdź hasło</mat-label>
                                 <mat-icon matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">
                                     {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 <input matInput #confirmPassword [type]="hideConfirmPassword ? 'password' : 'text'" required formControlName="confirmPassword" placeholder="Confirm password">
@@ -45,7 +46,7 @@
                                     {{confirmPassword.value.length}} / 25
                                 </mat-hint>
                                 <mat-error *ngIf="userForm.controls.confirmPassword.errors?.MatchPassword && userForm.controls.confirmPassword.touched">
-                                    Incorrect confirm password
+                                    Hasła się nie zgadzają
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -64,10 +65,10 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset">
-                        <button style="margin-top: 5px;" *ngIf="!isSaved" type="submit" class="btn btn-success">Save</button>
+                        <button style="margin-top: 5px;" *ngIf="!isSaved" type="submit" class="btn btn-success">Zapisz</button>
                     </div>
                     <div class="col-sm-offset">
-                        <button style="margin-top: 5px;" type="submit" *ngIf="isSaved" class="btn btn-success" disabled>Saved
+                        <button style="margin-top: 5px;" type="submit" *ngIf="isSaved" class="btn btn-success" disabled>Zapisane
                         </button>
                     </div>
                 </div>

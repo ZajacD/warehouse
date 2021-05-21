@@ -23,7 +23,7 @@ public class MaterialController {
     }
 
     @PostMapping(value = "/api/material")
-    public ResponseEntity<?> addRackSpace(@RequestBody Material material) {
+    public ResponseEntity<?> addMaterial(@RequestBody Material material) {
         return materialService.addMaterial(material);
     }
 

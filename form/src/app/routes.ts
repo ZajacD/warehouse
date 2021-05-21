@@ -13,12 +13,11 @@ import { AddUserComponent } from './admin/addUser/add.user.component';
 import { SupplyComponent } from './supply/supply.component';
 
 export const appRoutes = [
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegisterComponent },
   {
-    path: 'uploadMaterial', component: UploadMaterialComponent,
-    canActivate: [AuthGuard],
-    data: { expectedRole: 'ROLE_ADMIN' }
+    path: 'uploadMaterial', component: UploadMaterialComponent
   },
   { path: 'uploadRackSpace', component: UploadRackPlaceComponent },
   { path: 'materials', component: MaterialsComponent },

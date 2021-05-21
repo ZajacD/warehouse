@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class SupplyComponent implements OnInit {
 
-  public nofMaterial:number;
+  public nofMaterial: number;
   constructor(private http: HttpClient, private router: Router, public snackBar: MatSnackBar) {
   }
   ngOnInit() {
@@ -26,19 +26,18 @@ export class SupplyComponent implements OnInit {
   }
 
   save() {
-    if (this.nofMaterial>0) {
-      console.log(this.nofMaterial);
+    if (this.nofMaterial > 0) {
       var material = new Material();
       material.nofMaterial = Number(this.nofMaterial);
       this.http.put<any>(environment.API_URL + "/api/supply", material, { headers: new HttpHeaders().set('Authorization', localStorage.getItem('auth_token')).append("Content-Type", "application/json") }).subscribe(value => {
-        console.log(value);
-        this.snackBar.open('Nie możesz wybrać więcej produktów niż jest dostępne', '×', { duration: 6000 });
 
       },
         error => {
-          console.log(error);
+          if (error.error && error.status == 200) {
+            this.snackBar.open(error.error.text, '×', { verticalPosition: 'top', duration: 3000 });
 
-          if (!error.error.message && error.error.includes("Cannot find rack space")) {
+          }
+          else if (error.error && !error.error.message && error.error.includes("Cannot find rack space")) {
             this.snackBar.open('Nie ma wolnego miejsca dla tego materialu w magazynie', '×', { verticalPosition: 'top', duration: 3000 });
 
           }

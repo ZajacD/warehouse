@@ -6,6 +6,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { RackSpace } from '../../model/rackSpace';
 import { ActivatedRoute } from '@angular/router';
 import { Material } from 'src/app/model/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class EditMaterialComponent implements OnInit {
   public myForm: FormGroup;
   public material = new Material();
   public idOfMaterial;
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private route: ActivatedRoute, public snackBar: MatSnackBar
   ) {
   }
   ngOnInit(): void {
@@ -53,7 +54,17 @@ export class EditMaterialComponent implements OnInit {
   save(value) {
     if (this.myForm.valid) {
       this.http.post<any>(environment.API_URL + "/api/material", this.material, { headers: new HttpHeaders().set('Authorization', localStorage.getItem('auth_token')).append("Content-Type", "application/json") }).subscribe(value => {
-      });
+        this.snackBar.open('Materiał edytowany poprawnie', '×', { verticalPosition: 'top', duration: 6000 });
+
+      },
+        error => {
+          if (error.status == 200) {
+            this.snackBar.open('Materiał edytowany poprawnie', '×', { verticalPosition: 'top', duration: 6000 });
+          }
+          else {
+            this.snackBar.open('Nie można edytować materiału', '×', { verticalPosition: 'top', duration: 3000 });
+          }
+        });
     }
   }
 

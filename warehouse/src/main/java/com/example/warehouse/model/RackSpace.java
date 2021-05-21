@@ -96,4 +96,19 @@ public class RackSpace {
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
+
+    @Override
+    public String toString() {
+        return "RackSpace{" +
+                "id=" + id +
+                ", rackId='" + rackId + '\'' +
+                ", status=" + status +
+                ", width=" + width +
+                ", height=" + height +
+                ", length=" + length +
+                ", maxWeight=" + maxWeight +
+                ", priority=" + priority +
+                ", seller=" + seller +
+                '}';
+    }
 }

@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
 
   constructor( public router: Router,roleStoreService: RoleStoreService,) {
       router.events.subscribe(value => {
-      console.log("www");
       
     });
     const adminRole: Role = {
@@ -23,7 +22,6 @@ export class AppComponent implements OnInit {
           return false;
         }
         else {
-          console.log(permissions.includes("ROLE_ADMIN"));
           return permissions.includes("ROLE_ADMIN")
         }
 

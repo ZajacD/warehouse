@@ -128,4 +128,23 @@ public class Material {
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
+
+    @Override
+    public String toString() {
+        return "Material{" +
+                "id=" + id +
+                ", nofMaterial=" + nofMaterial +
+                ", width=" + width +
+                ", height=" + height +
+                ", length=" + length +
+                ", weight=" + weight +
+                ", dateOfUse=" + dateOfUse +
+                ", priority=" + priority +
+                ", supplier='" + supplier + '\'' +
+                ", supplierCountry='" + supplierCountry + '\'' +
+                ", status='" + status + '\'' +
+                ", seller=" + seller +
+                ", rackSpace=" + rackSpace +
+                '}';
+    }
 }

@@ -46,17 +46,13 @@ export class RegisterComponent implements OnInit {
     );
   }
   saveUser(value) {
-    console.log(this.user);
-    console.log(this.seller);
     if (this.userForm.valid) {
       this.user.seller = this.seller;
       this.http.post(environment.API_URL + '/api/auth/register', this.user).subscribe(res => {
         this.isSaved = true;
-        console.log(res);
         this.router.navigate(['login']);
       },
         error => {
-          console.log(error);
         });
     }
   }

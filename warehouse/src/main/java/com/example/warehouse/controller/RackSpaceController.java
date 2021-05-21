@@ -41,13 +41,11 @@ public class RackSpaceController {
 
     @PutMapping(value = "/api/rackSpace/take/{id}")
     public void takeIt(@PathVariable long id, @RequestBody RackSpace rackSpace) {
-        System.out.println("TAKE");
         rackSpaceService.takeIt(id);
 
     }
     @PutMapping(value = "/api/rackSpace/free/{id}")
     public void freeUp(@PathVariable long id, @RequestBody RackSpace rackSpace) {
-        System.out.println("FREEE");
         rackSpaceService.freeUp(id);
     }
 

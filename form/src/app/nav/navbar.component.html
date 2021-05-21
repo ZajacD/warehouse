@@ -83,21 +83,9 @@
                 </div>
             </li>
         </ul>
-        <ul *onlyForRoles="['ROLE_USER']" class="navbar-nav mr-auto">
-            <li style="cursor:pointer;" *ngIf="isLogged" class="nav-item" [routerLink]="['/item']">
-                <a class="nav-link newFont">Magazyn5</a>
-            </li>
-        </ul>
-        <ul *onlyForRoles="['ROLE_USER']" class="navbar-nav mr-auto">
-            <li style="cursor:pointer;" *ngIf="isLogged" class="nav-item" [routerLink]="['/reports/actual']">
-                <div>
-                    <a class="nav-link newFont">Magazyn6</a>
-                </div>
-            </li>
-        </ul>
 
-        <ul class="navbar-nav " style="float:right">
-            <li style="text-align: right; position: right; float:left" *ngIf="!isLogged && !registrationInProgress" class="nav-item newFont">
+        <ul class="navbar-nav " style="float:right;padding-left: 300px">
+            <li style="text-align: right; position: right; float:left " *ngIf="!isLogged && !registrationInProgress" class="nav-item newFont">
                 <a class="nav-link" [routerLink]="['/registration']">Zarejestruj się</a>
             </li>
 

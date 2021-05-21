@@ -32,11 +32,8 @@ public class RegisterServiceImpl implements RegisterService{
     @Override
     public ResponseEntity<?> createUser(User user, Seller seller) {
         user.setLogin(user.getEmail());
-        System.out.println(user.getEmail());
         seller.setEmail(user.getEmail());
-        System.out.println(seller.getCity());
         seller = sellerRepository.save(seller);
-        System.out.println(user.getPassword());
         user.setPassword(encoder.encode(user.getPassword()));
         Set<AppRole> appRoles = new HashSet<>();
         AppRole adminAppRole = roleRepository.findByName(ERole.ROLE_ADMIN)

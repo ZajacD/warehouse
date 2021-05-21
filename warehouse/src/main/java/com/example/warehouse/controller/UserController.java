@@ -53,8 +53,6 @@ public class UserController {
     }
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser( @RequestBody LoginRequest loginRequest) {
-        System.out.println(loginRequest.getUsername());
-        System.out.println(loginRequest.getPassword());
         Authentication authentication = authenticationManager.authenticate(
 
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -75,26 +73,6 @@ public class UserController {
 
     @PostMapping("/api/addUser")
     public ResponseEntity<?> addUser( @RequestBody AddUserRequest addUserRequest) {
-        System.out.println(addUserRequest.getUsername());
-        System.out.println(addUserRequest.getPassword());
-        System.out.println(addUserRequest.getRole());
-
-//        Authentication authentication = authenticationManager.authenticate(
-//
-//                new UsernamePasswordAuthenticationToken(addUserRequest.getUsername(), addUserRequest.getPassword()));
-//
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        String jwt = jwtUtils.generateJwtToken(authentication);
-//        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-//        List<String> roles = userDetails.getAuthorities().stream()
-//                .map(item -> item.getAuthority())
-//                .collect(Collectors.toList());
-//
-//        return ResponseEntity.ok(new JwtResponse(jwt,
-//                userDetails.getId(),
-//                userDetails.getUsername(),
-//                userDetails.getEmail(),
-//                roles));
         return registerService.addUser(addUserRequest);
     }
 }

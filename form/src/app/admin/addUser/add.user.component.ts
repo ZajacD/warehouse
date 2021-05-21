@@ -9,6 +9,7 @@ import { TaxNumberValidator } from '../../services/taxnumber-check.directive';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-user',
@@ -25,7 +26,7 @@ export class AddUserComponent implements OnInit {
   public url;
   public file;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router,
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, public snackBar: MatSnackBar
   ) {
   }
   ngOnInit() {
@@ -41,16 +42,23 @@ export class AddUserComponent implements OnInit {
     );
   }
   saveUser(value) {
-    console.log(this.user);
     if (this.userForm.valid) {
-      console.log("this.user");
-      console.log(this.userForm.value);
       var addUser = new AddUser();
       addUser.password = this.userForm.value.password;
       addUser.role = this.userForm.value.role;
       addUser.username = this.userForm.value.email;
       this.http.post<any>(environment.API_URL + "/api/auth/api/addUser",addUser , { headers: new HttpHeaders().set('Authorization', localStorage.getItem('auth_token')).append("Content-Type", "application/json") }).subscribe(value => {
-      });
+        this.snackBar.open('Użytkownik dodany poprawnie', '×', { verticalPosition: 'top', duration: 6000 });
+
+      },
+        error => {
+          if (error.status == 200) {
+            this.snackBar.open('Użytkownik dodany poprawnie', '×', { verticalPosition: 'top', duration: 6000 });
+          }
+          else {
+            this.snackBar.open('Nie można dodać użytkownika', '×', { verticalPosition: 'top', duration: 3000 });
+          }
+        });
     }
   }
 
